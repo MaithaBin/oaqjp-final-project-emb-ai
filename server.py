@@ -4,19 +4,20 @@
 '''
 
 from flask import Flask, render_template, request
-from EmotionDetection.emotion_detection import emotion_detector
+from EmotionDetection.emotion_detection import emotion_predictor
 
 app = Flask("Emotion Detector")
 
 @app.route("/emotionDetector")
 def sent_analyzer():
     ''' This code receives the text from the HTML interface and
-        runs emotion detector over it using emotion_detector()
+        runs emotion detector over it using emotion_predictor()
         function. The output returned shows the emotions score and 
         dominant emotion.
     '''
     text_to_analyze = request.args.get('textToAnalyze')
-    response = emotion_detector(text_to_analyze)
+    response = emotion_predictor(text_to_analyze)
+    
     # Outputs the result following the Task6
     anger_score = response['anger']
     disgust_score = response['disgust']
